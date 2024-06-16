@@ -82,7 +82,7 @@ namespace WalkingWeatherWpf.ViewModel
 
         public void MakeQuery()
         {
-            List<City> cities = AccuWeatherHelper.GetCities(Query);
+            List<City> cities = AccuWeatherHelper.GetCities(Query.Trim());
         }
     }
 }

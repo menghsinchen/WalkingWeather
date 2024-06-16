@@ -11,7 +11,11 @@ namespace WalkingWeatherWpf.ViewModel
     {
         public WeatherViewModel WeatherViewModel { get; set; }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
 
         public SearchCommand(WeatherViewModel weatherViewModel)
         {
@@ -20,7 +24,8 @@ namespace WalkingWeatherWpf.ViewModel
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            string query = parameter as string;
+            return !string.IsNullOrWhiteSpace(query);
         }
 
         public void Execute(object parameter)
