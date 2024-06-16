@@ -69,6 +69,7 @@
     <Compile Include="Model\CurrentConditions.cs" />
     <Compile Include="ViewModel\AccuWeatherHelper.cs" />
     <Compile Include="ViewModel\SecretHelper.cs" />
+    <Compile Include="ViewModel\WeatherViewModel.cs" />
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
