@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using WalkingWeatherWpf.Model;
 
 namespace WalkingWeatherWpf.ViewModel
@@ -18,6 +19,8 @@ namespace WalkingWeatherWpf.ViewModel
 
         public WeatherViewModel()
         {
+            SearchCommand = new SearchCommand(this);
+
             if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject()))
             {
                 SelectedCity = new City()
@@ -68,11 +71,18 @@ namespace WalkingWeatherWpf.ViewModel
             }
         }
 
+        public SearchCommand SearchCommand { get; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void MakeQuery()
+        {
+            List<City> cities = AccuWeatherHelper.GetCities(Query);
         }
     }
 }
