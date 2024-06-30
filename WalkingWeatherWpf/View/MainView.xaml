@@ -9,6 +9,7 @@
         Title="WeatherWindow" Height="600" Width="400">
     <Window.Resources>
         <viewModel:WeatherViewModel x:Key="vm" />
+        <viewModel:BoolToRainConverter x:Key="boolToRain" />
     </Window.Resources>
     <Grid DataContext="{StaticResource vm}">
         <Grid.RowDefinitions>
@@ -48,10 +49,14 @@
                            Foreground="#f4f4f8"
                            FontSize="18"
                            Margin="20,0"/>
+                <TextBlock Text="{Binding CurrentConditions.HasPrecipitation, Converter={StaticResource boolToRain}}"
+                           Foreground="#f4f4f8"
+                           FontSize="12"
+                           Margin="20,0"/>
             </StackPanel>
             <TextBlock Grid.Column="1"
                        VerticalAlignment="Center"
-                       Text="{Binding CurrentConditions.Temperature.Metric.Value, StringFormat={}{0} C}"
+                       Text="{Binding CurrentConditions.Temperature.Metric.Value, StringFormat={}{0} °C}"
                        Foreground="#f4f4f8"
                        FontSize="30"
                        Margin="20,0"/>

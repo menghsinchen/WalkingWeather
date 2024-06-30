@@ -68,6 +68,7 @@
     <Compile Include="Model\City.cs" />
     <Compile Include="Model\CurrentConditions.cs" />
     <Compile Include="ViewModel\AccuWeatherHelper.cs" />
+    <Compile Include="ViewModel\BoolToRainConverter.cs" />
     <Compile Include="ViewModel\SearchCommand.cs" />
     <Compile Include="ViewModel\SecretHelper.cs" />
     <Compile Include="ViewModel\WeatherViewModel.cs" />
