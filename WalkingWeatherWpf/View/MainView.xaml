@@ -22,37 +22,36 @@
                     CommandParameter="{Binding Query}"
                     Margin="0,10"
                     Content="Search" />
-            <ListView>
+            <ListView ItemsSource="{Binding Cities}"
+                      SelectedItem="{Binding SelectedCity}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <TextBlock />
+                            <TextBlock Text="{Binding LocalizedName}" />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </StackPanel>
         <Grid Grid.Row="1"
-              Background="#4392f1"
-              DataContext="{Binding CurrentConditions}">
+              Background="#4392f1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <StackPanel Margin="0,10">
-                <TextBlock DataContext="{StaticResource vm}"
-                           Text="{Binding SelectedCity.LocalizedName}"
+                <TextBlock Text="{Binding SelectedCity.LocalizedName}"
                            Foreground="#f4f4f8"
                            FontSize="20"
                            Margin="20,0"/>
-                <TextBlock Text="{Binding WeatherText}"
+                <TextBlock Text="{Binding CurrentConditions.WeatherText}"
                            Foreground="#f4f4f8"
                            FontSize="18"
                            Margin="20,0"/>
             </StackPanel>
             <TextBlock Grid.Column="1"
                        VerticalAlignment="Center"
-                       Text="{Binding Temperature.Metric.Value, StringFormat={}{0} C}"
+                       Text="{Binding CurrentConditions.Temperature.Metric.Value, StringFormat={}{0} C}"
                        Foreground="#f4f4f8"
                        FontSize="30"
                        Margin="20,0"/>

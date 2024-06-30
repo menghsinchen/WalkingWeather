@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace WalkingWeatherWpf.ViewModel
         public WeatherViewModel()
         {
             SearchCommand = new SearchCommand(this);
+            Cities = new ObservableCollection<City>();
 
             if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject()))
             {
@@ -68,8 +70,11 @@ namespace WalkingWeatherWpf.ViewModel
             {
                 selectedCity = value;
                 OnPropertyChanged(nameof(SelectedCity));
+                GetCurrentConditions();
             }
         }
+
+        public ObservableCollection<City> Cities { get; set; }
 
         public SearchCommand SearchCommand { get; }
 
@@ -82,7 +87,17 @@ namespace WalkingWeatherWpf.ViewModel
 
         public void MakeQuery()
         {
+            Cities.Clear();
             List<City> cities = AccuWeatherHelper.GetCities(Query.Trim());
+            foreach (City city in cities)
+            {
+                Cities.Add(city);
+            }
+        }
+
+        private void GetCurrentConditions()
+        {
+            CurrentConditions = AccuWeatherHelper.GetCurrentConditions(SelectedCity.Key);
         }
     }
 }

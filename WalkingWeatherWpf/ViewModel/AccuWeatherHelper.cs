@@ -18,14 +18,17 @@ namespace WalkingWeatherWpf.ViewModel
         public static List<City> GetCities(string query)
         {
             List<City> cities = new List<City>();
-            string url = $"{BASE_URL}locations/v1/cities/autocomplete?apikey={API_KEY}&q={query}";
-            using(HttpClient client = new HttpClient())
+            if (!string.IsNullOrEmpty(query))
             {
-                HttpResponseMessage response = client.GetAsync(url).Result;
-                string json = response.Content.ReadAsStringAsync().Result;
-                cities = JsonConvert.DeserializeObject<List<City>>(json);
+                string url = $"{BASE_URL}locations/v1/cities/autocomplete?apikey={API_KEY}&q={query}";
+                using (HttpClient client = new HttpClient())
+                {
+                    HttpResponseMessage response = client.GetAsync(url).Result;
+                    string json = response.Content.ReadAsStringAsync().Result;
+                    cities = JsonConvert.DeserializeObject<List<City>>(json);
+                }
             }
-            return cities;
+            return cities;  
         }
 
         public static CurrentConditions GetCurrentConditions(string locationKey)
